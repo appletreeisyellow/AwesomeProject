@@ -9,7 +9,8 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  Image
 } from 'react-native';
 
 export default class AwesomeProject extends Component {
@@ -26,6 +27,48 @@ export default class AwesomeProject extends Component {
           Press Cmd+R to reload,{'\n'}
           Cmd+D or shake for dev menu
         </Text>
+        <Bananas />
+        <BlinkApp />
+      </View>
+    );
+  }
+}
+
+class Bananas extends Component {
+  render() {
+    let pic = {
+      uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
+    };
+    return (
+      <Image source={pic} style={{width: 193, height: 110}}/>
+    );
+  }
+}
+
+class Blink extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {showText: true};
+
+    // Toggle the state every second
+    setInterval(() => {
+      this.setState({ showText: !this.state.showText });
+    }, 1000);
+  }
+
+  render() {
+    let display = this.state.showText ? this.props.text : ' ';
+    return (
+      <Text>{display}</Text>
+    );
+  }
+}
+
+class BlinkApp extends Component {
+  render() {
+    return (
+      <View>
+        <Blink text='I love to blink' />
       </View>
     );
   }
